@@ -1,0 +1,46 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[application]
+
+config/name="NIENTIENDO720p"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/stretch/mode="2d"
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Level"
+2d_physics/layer_4="Enemies"
+2d_physics/layer_5="Projectiles"
+
+[physics]
+
+2d/thread_model=2
+
+[rendering]
+
+quality/intended_usage/framebuffer_allocation=0
+threads/thread_model=2
+quality/subsurface_scattering/quality=2
+quality/voxel_cone_tracing/high_quality=true
+quality/filters/msaa=false
+environment/default_environment="res://default_env.tres"
