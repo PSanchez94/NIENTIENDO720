@@ -5,11 +5,14 @@ extends Node
 # var a = 2
 # var b = "text"
 onready var curr_lvl = $Level1
+onready var curr_tilemap = $Level1.get_node("CurrTileMap")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	curr_lvl.connect("lvl_changed", self, "lvl_change_hdlr")
+	curr_lvl.connect("lvl_change", self, "lvl_change_hdlr")
+	curr_lvl.get_node("Camera2D").make_current()
+	get_node("../player_1").tile_map = curr_tilemap
 	
 	pass # Replace with function body.
 
@@ -20,7 +23,7 @@ func _ready():
 
 func lvl_change_hdlr(next_lvl_name: String):
 	var next_level
-	
+	print(next_lvl_name)
 	next_level = load("res://scenes/" + next_lvl_name + ".tscn").instance()
 	
 	pass
