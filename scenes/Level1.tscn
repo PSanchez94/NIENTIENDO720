@@ -126,7 +126,7 @@ anims/OpenDoor = SubResource( 3 )
 position = Vector2( 1050.21, 351.495 )
 
 [node name="Door" parent="Puzzle/NorthDoor2" instance=ExtResource( 6 )]
-position = Vector2( 730, 130 )
+position = Vector2( 730, -100 )
 script = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Puzzle/NorthDoor2/Door"]

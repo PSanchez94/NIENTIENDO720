@@ -157,3 +157,5 @@ shape = SubResource( 1 )
 [connection signal="animation_finished" from="Camera2D/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="ToNLevel" to="." method="_on_ToNLevel_body_entered"]
 [connection signal="body_exited" from="ToNLevel" to="." method="_on_ToNLevel_body_exited"]
+[connection signal="body_entered" from="ToSLevel" to="." method="_on_ToSLevel_body_entered"]
+[connection signal="body_exited" from="ToSLevel" to="." method="_on_ToSLevel_body_exited"]

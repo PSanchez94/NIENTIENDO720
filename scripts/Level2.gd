@@ -51,11 +51,11 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "FromCToN":
 		get_node("../../player_1").set_position(get_node("StartingPositionN").get_position())
 	elif anim_name == "FromNToC":
-		get_node("../player_1").set_position(get_node("StartingPosition").get_position())
+		get_node("../../player_1").set_position(get_node("StartingPosition").get_position())
 	elif anim_name == "FromCToS":
-		get_node("../player_1").set_position(get_node("StartingPositionS").get_position())
+		get_node("../../player_1").set_position(get_node("StartingPositionS").get_position())
 	elif anim_name == "FromSToC":
-		get_node("../player_1").set_position(get_node("StartingPosition").get_position())
+		get_node("../../player_1").set_position(get_node("StartingPosition").get_position())
 		
 	get_node("../../player_1/CollisionShape2D/Sprite").visible = true
 	#emit_signal("lvl_change", e_lvl_name)
@@ -63,7 +63,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_ToNLevel_body_entered(body):
-	print(body)
 	#print(players_on_end.find(body))
 	if players_to_n.find(body) == -1:
 		players_to_n.append(body)
@@ -77,3 +76,20 @@ func _on_ToNLevel_body_entered(body):
 func _on_ToNLevel_body_exited(body):
 	if players_to_n.find(body) != -1:
 		players_to_n.remove(players_on_end.find(body))
+
+
+func _on_ToSLevel_body_entered(body):
+	#print(players_on_end.find(body))
+	if players_to_s.find(body) == -1:
+		players_to_s.append(body)
+		if (players_to_s.size() == 1):
+			get_node("../../player_1/CollisionShape2D/Sprite").visible = false
+			get_node("Camera2D/AnimationPlayer").play("FromCToS")
+			#emit_signal("lvl_change", e_lvl_name)
+	pass # Replace with function body.
+
+
+
+func _on_ToSLevel_body_exited(body):
+	if players_to_s.find(body) != -1:
+		players_to_s.remove(players_on_end.find(body))
