@@ -56,12 +56,9 @@ func _physics_process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("habilidad"):
 			var plataforma_posicion = Vector2(int(get_global_mouse_position().x/64), int(get_global_mouse_position().y/64))
-			print(plataforma_posicion)
 			if platforms < max_platform and tile_map.get_cellv(plataforma_posicion)==-1:
-				print("first if")
 				tile_map.set_cellv(plataforma_posicion, 0)
 				platforms += 1
 			elif tile_map.get_cellv(plataforma_posicion) == 0 and platforms > 0:
-				print("second if")
 				platforms -= 1
 				tile_map.set_cellv(plataforma_posicion, -1)

@@ -22,7 +22,6 @@ func _ready():
 
 func lvl_change_hdlr(next_lvl_name: String):
 	var next_level
-	print(next_lvl_name)
 	next_level = load("res://scenes/" + next_lvl_name + ".tscn").instance()
 	
 	pass
