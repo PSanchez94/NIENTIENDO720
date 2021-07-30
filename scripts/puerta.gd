@@ -11,19 +11,6 @@ func _ready():
 		print(palanca.name, ' ', palanca.state)
 
 
-func CheckCode():
-	print("check palancas")
-	
-	var estadoPalancas = ""
-	for palanca in palancas:
-		estadoPalancas += palanca.state
-	if estado == estadoPalancas:
-		
-		$"StaticBody2D/CollisionShape2D".disabled = true
-	else:
-		$"StaticBody2D/CollisionShape2D".disabled = false
-
-
 func _on_Lever_palancaActiva(palanca_name):
 	print("check palancas")
 	
