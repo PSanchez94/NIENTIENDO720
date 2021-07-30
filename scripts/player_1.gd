@@ -12,8 +12,8 @@ var jumps = 0
 var max_platform = 2
 var platforms = 0
 
-# What tilemap to use?
-onready var tile_map : TileMap
+onready var tile_map : TileMap = get_node("../MageTileMap")
+
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("personaje_1"):
@@ -35,7 +35,6 @@ func _physics_process(delta: float) -> void:
 		var target_vel = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 		
 		if Input.is_action_pressed("move_right"):
-			print(tile_map)
 			$CollisionShape2D/Sprite.flip_h = false
 		if Input.is_action_pressed("move_left"):
 			$CollisionShape2D/Sprite.flip_h = true
@@ -56,16 +55,13 @@ func _physics_process(delta: float) -> void:
 			lineal_vel.x = lerp(lineal_vel.x, target_vel * speed, 0.1)
 		
 		if Input.is_action_just_pressed("habilidad"):
-			
-			var plataforma_posicion = Vector2(int(get_global_mouse_position().x/16), int(get_global_mouse_position().y/16))
+			var plataforma_posicion = Vector2(int(get_global_mouse_position().x/64), int(get_global_mouse_position().y/64))
+			print(plataforma_posicion)
 			if platforms < max_platform and tile_map.get_cellv(plataforma_posicion)==-1:
-				tile_map.set_cellv(plataforma_posicion, 2)
+				print("first if")
+				tile_map.set_cellv(plataforma_posicion, 0)
 				platforms += 1
-			elif tile_map.get_cellv(plataforma_posicion) == 2 and platforms > 0:
+			elif tile_map.get_cellv(plataforma_posicion) == 0 and platforms > 0:
+				print("second if")
 				platforms -= 1
 				tile_map.set_cellv(plataforma_posicion, -1)
-
-				
-			
-	
-	
