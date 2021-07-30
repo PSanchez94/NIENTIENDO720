@@ -17,14 +17,15 @@ export (String) var e_lvl_name
 
 
 func _on_ToELevel_body_entered(body):
-	#emit_signal("lvl_change", e_lvl_name)
-	
+	print(body)
 	#print(players_on_end.find(body))
 	if players_on_end.find(body) == -1:
-		if (players_on_end.size() == 3):
-			emit_signal("lvl_change", e_lvl_name)
+		players_on_end.append(body)
+		if (players_on_end.size() == 1):
+			print("old emit signal")
+			get_node("Camera2D/AnimationPlayer").play("ELevel")
+			#emit_signal("lvl_change", e_lvl_name)
 		else:
-			players_on_end.append(body)
 			print(players_on_end)
 	pass # Replace with function body.
 
@@ -42,3 +43,7 @@ func _ready():
 #	pass
 
 
+func _on_AnimationPlayer_animation_finished(anim_name):
+	print("emit signal after animation finished")
+	emit_signal("lvl_change", e_lvl_name)
+	pass # Replace with function body.

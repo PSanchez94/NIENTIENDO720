@@ -39,6 +39,7 @@ position = Vector2( 8, 0 )
 tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 64
+collision_mask = 0
 format = 1
 tile_data = PoolIntArray( -1, 536870912, 0, 65535, 536870912, 0 )
 

@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/Puerta.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/puerta.gd" type="Script" id=7]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "ELevel"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1150, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "CloseDoor"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -37,8 +37,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1050, 750 ), Vector2( 1050, 510 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "OpenDoor"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
@@ -52,7 +51,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1050, 510 ), Vector2( 1050, 750 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "CloseDoor"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -67,7 +66,7 @@ tracks/0/keys = {
 "values": [ Vector2( 730, -100 ), Vector2( 730, 130 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "OpenDoor"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -82,7 +81,7 @@ tracks/0/keys = {
 "values": [ Vector2( 730, 130 ), Vector2( 730, -100 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 64, 64 )
 
 [node name="Level1" type="Node2D"]
@@ -95,7 +94,7 @@ anchor_mode = 0
 zoom = Vector2( 0.9, 0.89 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
-anims/ELevel = SubResource( 4 )
+anims/ELevel = SubResource( 1 )
 
 [node name="CurrTileMap" parent="." instance=ExtResource( 4 )]
 
@@ -117,8 +116,8 @@ position = Vector2( 1050, 510 )
 script = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Puzzle/NextLevelDoor/Door"]
-anims/CloseDoor = SubResource( 3 )
-anims/OpenDoor = SubResource( 1 )
+anims/CloseDoor = SubResource( 2 )
+anims/OpenDoor = SubResource( 3 )
 
 [node name="NorthDoor2" type="Node2D" parent="Puzzle"]
 
@@ -132,16 +131,17 @@ position = Vector2( 730, 130 )
 script = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Puzzle/NorthDoor2/Door"]
-anims/CloseDoor = SubResource( 5 )
-anims/OpenDoor = SubResource( 6 )
+anims/CloseDoor = SubResource( 4 )
+anims/OpenDoor = SubResource( 5 )
 
 [node name="ToELevel" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ToELevel"]
 position = Vector2( 1088, 512 )
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
+[connection signal="animation_finished" from="Camera2D/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="palancaActiva" from="Puzzle/NextLevelDoor/Levers/Lever" to="Puzzle/NextLevelDoor/Door" method="_on_Lever_palancaActiva"]
 [connection signal="palancaActiva" from="Puzzle/NorthDoor2/Levers/Lever" to="Puzzle/NorthDoor2/Door" method="_on_Lever_palancaActiva"]
 [connection signal="body_entered" from="ToELevel" to="." method="_on_ToELevel_body_entered"]
