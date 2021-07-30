@@ -20,18 +20,11 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func lvl_change_hdlr(next_lvl_name: String):
-	var next_level
-	next_level = load("res://scenes/" + next_lvl_name + ".tscn").instance()
-	
-	add_child(next_level)
-	
-	
-	pass
-
 func _on_Level1_lvl_change(next_lvl_name):
 	var next_level
-	next_level = load("res://scenes/" + next_lvl_name + ".tscn").instance()
+	print(next_lvl_name)
+	if next_lvl_name != null:
+		next_level = load("res://scenes/" + next_lvl_name + ".tscn").instance()
 	
 	add_child(next_level)
 	curr_lvl.get_node("Camera2D/AnimationPlayer").play("ELevel")

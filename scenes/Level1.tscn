@@ -109,7 +109,6 @@ anims/ELevel = SubResource( 1 )
 [node name="Lever" parent="Puzzle/NextLevelDoor/Levers" instance=ExtResource( 2 )]
 light_mask = 0
 position = Vector2( 618.749, 161.609 )
-palanca_name = "NextLevelLever"
 
 [node name="Door" parent="Puzzle/NextLevelDoor" instance=ExtResource( 6 )]
 position = Vector2( 1050, 510 )
