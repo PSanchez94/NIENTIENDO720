@@ -7,7 +7,7 @@ extends Node2D
 var players_on_end = []
 var players_to_n = []
 var players_to_s = []
-
+var players_to_c = []
 
 signal lvl_change(lvl_name)
 
@@ -18,22 +18,19 @@ export (String) var s_lvl_name
 export (String) var e_lvl_name
 
 
-func _on_ToELevel_body_entered(body):
-	print(body)
-	#print(players_on_end.find(body))
-	if players_on_end.find(body) == -1:
-		players_on_end.append(body)
-		if (players_on_end.size() == 1):
-			print("old emit signal")
-			get_node("../../player_1/CollisionShape2D/Sprite").visible = false
-			get_node("Camera2D/AnimationPlayer").play("ELevel")
-		else:
-			print(players_on_end)
-	pass # Replace with function body.
+#func _on_ToELevel_body_entered(body):
+#	#print(players_on_end.find(body))
+#	if players_on_end.find(body) == -1:
+#		players_on_end.append(body)
+#		if (players_on_end.size() == 1):
+#			get_node("../../player_1/CollisionShape2D/Sprite").visible = false
+#			get_node("Camera2D/AnimationPlayer").play("ELevel")
+#			players_on_end.clear()
+#	pass # Replace with function body.
 
-func _on_ToELevel_body_exited(body):
-	if players_on_end.find(body) != -1:
-		players_on_end.remove(players_on_end.find(body))
+#func _on_ToELevel_body_exited(body):
+#	if players_on_end.find(body) != -1:
+#		players_on_end.remove(players_on_end.find(body))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,7 +43,8 @@ func _ready():
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	print("emit signal after animation finished")
+	
+	print("GlitchStart?")
 	
 	if anim_name == "FromCToN":
 		get_node("../../player_1").set_position(get_node("StartingPositionN").get_position())
@@ -58,24 +56,22 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		get_node("../../player_1").set_position(get_node("StartingPosition").get_position())
 		
 	get_node("../../player_1/CollisionShape2D/Sprite").visible = true
-	#emit_signal("lvl_change", e_lvl_name)
 	pass # Replace with function body.
 
 
 func _on_ToNLevel_body_entered(body):
-	#print(players_on_end.find(body))
 	if players_to_n.find(body) == -1:
 		players_to_n.append(body)
 		if (players_to_n.size() == 1):
 			get_node("../../player_1/CollisionShape2D/Sprite").visible = false
+			players_to_n.clear()
 			get_node("Camera2D/AnimationPlayer").play("FromCToN")
-			#emit_signal("lvl_change", e_lvl_name)
 	pass # Replace with function body.
 
 
 func _on_ToNLevel_body_exited(body):
 	if players_to_n.find(body) != -1:
-		players_to_n.remove(players_on_end.find(body))
+		players_to_n.remove(players_to_n.find(body))
 
 
 func _on_ToSLevel_body_entered(body):
@@ -84,12 +80,42 @@ func _on_ToSLevel_body_entered(body):
 		players_to_s.append(body)
 		if (players_to_s.size() == 1):
 			get_node("../../player_1/CollisionShape2D/Sprite").visible = false
+			players_to_s.clear()
 			get_node("Camera2D/AnimationPlayer").play("FromCToS")
-			#emit_signal("lvl_change", e_lvl_name)
 	pass # Replace with function body.
-
 
 
 func _on_ToSLevel_body_exited(body):
 	if players_to_s.find(body) != -1:
-		players_to_s.remove(players_on_end.find(body))
+		players_to_s.remove(players_to_s.find(body))
+
+
+func _on_FromNtoC_body_entered(body):
+	if players_to_c.find(body) == -1:
+		players_to_c.append(body)
+		if (players_to_c.size() == 1):
+			get_node("../../player_1/CollisionShape2D/Sprite").visible = false
+			players_to_c.clear()
+			get_node("Camera2D/AnimationPlayer").play("FromNToC")
+	pass # Replace with function body.
+
+
+func _on_FromNtoC_body_exited(body):
+	if players_to_c.find(body) != -1:
+		players_to_c.remove(players_to_c.find(body))
+
+
+func _on_FromStoC_body_entered(body):
+	if players_to_c.find(body) == -1:
+		players_to_c.append(body)
+		if (players_to_c.size() == 1):
+			get_node("../../player_1/CollisionShape2D/Sprite").visible = false
+			players_to_c.clear()
+			get_node("Camera2D/AnimationPlayer").play("FromSToC")
+			#emit_signal("lvl_change", e_lvl_name)
+	pass # Replace with function body.
+
+
+func _on_FromStoC_body_exited(body):
+	if players_to_c.find(body) != -1:
+		players_to_c.remove(players_to_c.find(body))

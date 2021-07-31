@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Level2TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Level3-1TileMap.tscn" type="PackedScene" id=2]
@@ -49,7 +49,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -635 ), Vector2( 0, 635 ) ]
+"values": [ Vector2( 0, -635 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -70,6 +70,12 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 51.5505, 64 )
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 28.9712, 63.3498 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 30.3934, 65.2028 )
+
 [node name="Level2" type="Node2D"]
 script = ExtResource( 4 )
 
@@ -77,7 +83,7 @@ script = ExtResource( 4 )
 position = Vector2( 317.16, -123.163 )
 
 [node name="StartingPositionS" type="Node2D" parent="."]
-position = Vector2( 1028.1, 1145.45 )
+position = Vector2( 961.426, 1156.56 )
 
 [node name="StartingPosition" type="Node2D" parent="."]
 position = Vector2( 77.3727, 511.945 )
@@ -111,36 +117,22 @@ position = Vector2( 1055, 130 )
 
 [node name="ButtonsS" type="Node" parent="Node2D"]
 
-[node name="boton3" parent="Node2D/ButtonsS" instance=ExtResource( 6 )]
-position = Vector2( 770.746, 800.445 )
-script = null
-
-[node name="boton2" parent="Node2D/ButtonsS" instance=ExtResource( 6 )]
-position = Vector2( 772.161, 991.364 )
-script = null
-
 [node name="boton" parent="Node2D/ButtonsS" instance=ExtResource( 6 )]
-position = Vector2( 117.38, 803.273 )
-script = null
-
-[node name="boton4" parent="Node2D/ButtonsS" instance=ExtResource( 6 )]
-position = Vector2( 125.865, 991.364 )
-script = null
-
-[node name="boton5" parent="Node2D/ButtonsS" instance=ExtResource( 6 )]
-position = Vector2( 448.306, 800.445 )
+position = Vector2( 447.011, 799.91 )
 script = null
 
 [node name="Palancas" type="Node" parent="Node2D"]
 
 [node name="ToNLevel" type="Area2D" parent="."]
-collision_mask = 0
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ToNLevel"]
 position = Vector2( 190, 130 )
 shape = SubResource( 1 )
 
 [node name="ToSLevel" type="Area2D" parent="."]
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ToSLevel"]
@@ -148,14 +140,35 @@ position = Vector2( 900, 510 )
 shape = SubResource( 1 )
 
 [node name="ToELevel" type="Area2D" parent="."]
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ToELevel"]
 position = Vector2( 1100, 130 )
 shape = SubResource( 1 )
 
+[node name="FromNtoC" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FromNtoC"]
+position = Vector2( 97.8075, -128.471 )
+shape = SubResource( 6 )
+
+[node name="FromStoC" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FromStoC"]
+position = Vector2( 1059.67, 1146.95 )
+shape = SubResource( 7 )
+
 [connection signal="animation_finished" from="Camera2D/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="ToNLevel" to="." method="_on_ToNLevel_body_entered"]
 [connection signal="body_exited" from="ToNLevel" to="." method="_on_ToNLevel_body_exited"]
 [connection signal="body_entered" from="ToSLevel" to="." method="_on_ToSLevel_body_entered"]
 [connection signal="body_exited" from="ToSLevel" to="." method="_on_ToSLevel_body_exited"]
+[connection signal="body_entered" from="FromNtoC" to="." method="_on_FromNtoC_body_entered"]
+[connection signal="body_exited" from="FromNtoC" to="." method="_on_FromNtoC_body_exited"]
+[connection signal="body_entered" from="FromStoC" to="." method="_on_FromStoC_body_entered"]
+[connection signal="body_exited" from="FromStoC" to="." method="_on_FromStoC_body_exited"]

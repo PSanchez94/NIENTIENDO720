@@ -20,9 +20,10 @@ func _on_ToELevel_body_entered(body):
 	if players_on_end.find(body) == -1:
 		players_on_end.append(body)
 		if (players_on_end.size() == 1):
-			print("old emit signal")
 			get_node("../../player_1/CollisionShape2D/Sprite").visible = false
+			players_on_end.clear()
 			get_node("Camera2D/AnimationPlayer").play("ELevel")
+			
 	pass # Replace with function body.
 
 func _on_ToELevel_body_exited(body):
