@@ -44,7 +44,6 @@ func _ready():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	
-	print("GlitchStart?")
 	
 	if anim_name == "FromCToN":
 		get_node("../../player_1").set_position(get_node("StartingPositionN").get_position())
